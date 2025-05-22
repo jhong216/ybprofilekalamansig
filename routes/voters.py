@@ -1,6 +1,5 @@
 from flask import *
 from db.db import connection
-from routes.functions import render_pdf_portrait_a4
 
 
 voters=Blueprint('voters',__name__,template_folder="../templates/voters", static_folder='../static',url_prefix='/Voters')
