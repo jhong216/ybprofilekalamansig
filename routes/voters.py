@@ -25,8 +25,7 @@ def voters_list_barangay(brgy):
     cur=db.cursor()
     cur.execute("Select * from voters where barangay='"+brgy+"' order by purok,fullname")
     rw=cur.fetchall()
-    html=render_template('voters_list_barangay.html',rw=rw)
-    return render_pdf_portrait_a4(html)
+    return render_template('voters_list_barangay.html',rw=rw)
 
 @voters.route('/verification')
 def voters_verify():
