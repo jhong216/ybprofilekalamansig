@@ -7,7 +7,7 @@ report=Blueprint('report',__name__,template_folder='../templates/reports',url_pr
 
 @report.route('/')
 def home():
-    return render_template('reports_home.html')
+    return render_template('Reports_home.html')
 
 
 @report.route('/barangay_figure')
