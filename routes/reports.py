@@ -27,8 +27,7 @@ def brgy_list_report(cri):
     cur=db.cursor()
     cur.execute("select * from profile where barangay = '"+cri+"' ORDER BY SITIO,FULLNAME")
     rw=cur.fetchall()
-    html=render_template('brgy_list_report.html',rw=rw)
-    return render_pdf_portrait_a4(html)
+    return render_template('brgy_list_report.html',rw=rw)
 
 @report.route('/print_brgy_list_hh/<cri>')
 def brgy_list_hh(cri):
@@ -36,8 +35,7 @@ def brgy_list_hh(cri):
     cur=db.cursor()
     cur.execute("select * from profile where coordinator = '"+cri+"' ORDER BY FULLNAME")
     rw=cur.fetchall()
-    html=render_template('brgy_list_hh.html',rw=rw)
-    return render_pdf_portrait_a4(html)
+    return render_template('brgy_list_hh.html',rw=rw)
 
 
 @report.route('/report_group_figure')
@@ -56,8 +54,7 @@ def brgy_groupingbarangay_report(brgy,group):
     cur=db.cursor()
     cur.execute("select * from profile where barangay = '"+brgy+"'  and coordinator = '"+group+"' ORDER BY SITIO,FULLNAME")
     rw=cur.fetchall()
-    html=render_template('brgy_list_report.html',rw=rw,title=group)
-    return render_pdf_portrait_a4(html)
+    return render_template('brgy_list_report.html',rw=rw,title=group)
 
 
 @report.route('/report_purok_figure/<brgy>')
@@ -76,8 +73,7 @@ def brgy_purok_report(brgy,prk):
     cur=db.cursor()
     cur.execute("select * from profile where barangay = '"+brgy+"'  and sitio = '"+prk+"' ORDER BY SITIO,FULLNAME")
     rw=cur.fetchall()
-    html=render_template('brgy_list_report.html',rw=rw)
-    return render_pdf_portrait_a4(html)
+    return render_template('brgy_list_report.html',rw=rw)
 
 @report.route('/print_brgy_list/<cri>/')
 def coor_alllist_report(cri):
@@ -86,8 +82,7 @@ def coor_alllist_report(cri):
     cur.execute("select * from profile where coordinator ='"+cri+"' ORDER BY SITIO,FULLNAME")
     rw=cur.fetchall()
     t="COORDINATOR"
-    html=render_template('brgy_list_report.html',rw=rw,title=cri,t=t)
-    return render_pdf_portrait_a4(html)
+    return render_template('brgy_list_report.html',rw=rw,title=cri,t=t)
 
 @report.route('/household_figure/<brgy>')
 def report_hh_figure(brgy):
@@ -106,8 +101,7 @@ def report_hhlist(hh):
     cur=db.cursor()
     cur.execute("Select *  from profile where code ='"+hh+"' order by fullname")
     rw=cur.fetchall()
-    html=render_template('hhlist.html',rw=rw,hh=hh)
-    return render_pdf_landscape_a4(html)
+    return render_template('hhlist.html',rw=rw,hh=hh)
 #===COORDINATOR============================================================================
 @report.route('/coor_figure/')
 def coor_figure():
@@ -151,8 +145,7 @@ def coor_members_list(c):
         rw=cur.fetchall()
         for i in rw:
             cor=f'{i[5]}'
-        html=render_template('/coordinator/coor_members.html',rw=rw,cor=cor)
-        return render_pdf_portrait_a4(html)
+        return render_template('/coordinator/coor_members.html',rw=rw,cor=cor)
     except Exception as e:
         return str(e)
 
@@ -162,8 +155,7 @@ def household_list_brgy(brgy):
     cur=db.cursor()
     cur.execute("Select *,coordinator.id,coordinatoR.name from Profile inner join coordinator where coordinator.id=profile.coor and profile.barangay='"+brgy+"'")
     rw=cur.fetchall()
-    html=render_template('/brgy_list_hh.html',rw=rw)
-    return render_pdf_portrait_a4(html)
+    return render_template('/brgy_list_hh.html',rw=rw)
 
 
 #LEADER================================================================================
@@ -175,8 +167,7 @@ def leaderlist_brgy(brgy):
                 inner join coordinator on coordinator.id=profile.coor
                   where coordinator.barangay='"""+brgy+"""'""")
     rw=cur.fetchall()
-    html=render_template('/coordinator/leader.html',rw=rw,brgy=brgy)
-    return render_pdf_portrait_a4(html)
+    return render_template('/coordinator/leader.html',rw=rw,brgy=brgy)
 
 @report.route('/leaderlist/<brgy>/<prk>/')
 def leaderlist_prk(brgy,prk):
@@ -188,6 +179,5 @@ def leaderlist_prk(brgy,prk):
                 inner join coordinator on coordinator.id=profile.coor
                   where coordinator.barangay='"""+brgy+"""' and coordinator.address='"""+prk+"""'""")
     rw=cur.fetchall()
-    html=render_template('/coordinator/leader.html',rw=rw,brgy=brgy)
-    return render_pdf_portrait_a4(html)
+    return render_template('/coordinator/leader.html',rw=rw,brgy=brgy)
 
