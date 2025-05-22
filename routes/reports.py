@@ -1,6 +1,6 @@
 from flask import *
 from db.db import connection
-from routes.functions import *
+
 
 
 report=Blueprint('report',__name__,template_folder='../templates/reports',url_prefix='/reports')
