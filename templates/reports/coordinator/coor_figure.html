@@ -1,0 +1,27 @@
+{%extends 'reports_home.html'%}
+{%block reports%}
+<table class="table table-hover table-bordered table-sm m-50" style="width: 60%;margin: auto;">
+    <tr style="text-align: center;">
+        <th>BARANGAY</th>
+        <th>NO OF COORDINATORS</th>
+        <th>ACTIONS</th>
+    </tr>
+    {%for b,i in rw|groupby(0)%}
+    <tr>
+        <td style="color: blue;"> <a href="{{url_for('report.list_coordinator_brgy',brgy=b)}}"> <strong>{{b}}</strong></a></td>
+        <td style="color: blue;text-align: center;"><a href="{{url_for('report.list_coordinator_brgy',brgy=b)}}"><strong>{{i|sum(attribute=2)}}</strong></a></td>
+        <td style="text-align: center;"><a href="{{url_for('report.leaderlist_brgy',brgy=b)}}"  target="_blank">View List</a></td>
+    </tr>
+   
+        {%for p,a in i|groupby(1)%}
+        <tr>
+            <td style="color:red;"><a href="{{url_for('report.list_coordinator',brgy=b,prk=p)}}" style="color: red;">{{p}}</a></td>
+            <td style="text-align: center;"><a href="{{url_for('report.list_coordinator',brgy=b,prk=p)}}" style="color: red;">{{a[0][2]}}</a></td>
+            <td style="text-align: center;"><a href="{{url_for('report.leaderlist_prk',brgy=b,prk=p)}}" target="_blank">View List</a></td>
+        </tr>
+        {%endfor%}
+
+    {%endfor%}
+</table>
+
+{%endblock%}

@@ -1,0 +1,40 @@
+
+<table class="table table-striped-sm" id="profile_voters_table">
+    <thead>
+      <tr style="text-align: center !important;">
+        <th scope="col">FULLNAME</th>
+        <th scope="col">PRECINT</th>
+        <th scope="col">SITIO / PUROK</th>
+        <th scope="col">BARANGAY</th>
+      
+      </tr>
+    </thead>
+    <tbody>
+    {%for i in rw%}
+      <tr id="trvoters">
+        <td>{{i[1]}}</td>
+        <td>{{i[2]}}</td>
+        <td>{{i[3]}}</td>
+        <td>{{i[4]}}</td>
+      </tr>
+      {%endfor%}
+     </tbody>
+  </table>
+
+  <script>
+    $('#profile_voters_table').on("click","#trvoters",function(){
+       var tr=$(this).closest("tr");
+       var fn=tr.find("td:eq(0)").text();
+       var precint=tr.find("td:eq(1)").text();
+       var sitio=tr.find("td:eq(2)").text();
+       var brgy=tr.find("td:eq(3)").text();
+       $('.savemessage').html("")
+       $('#fn').val(fn);
+       $('#precint').val(precint);
+       $('#purok').val(sitio);
+       $('#barangay').val(brgy);
+    })
+</script>
+<style>
+#trvoters td:hover{background-color: aquamarine !important;}
+</style>

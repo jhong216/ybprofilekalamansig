@@ -1,0 +1,87 @@
+{%extends 'profile_coordinator.html'%}
+{%block coordinator%}
+ <table class="table table-striped table-responsive-sm" id="profile-content" >
+            <thead>
+                <tr>
+                <th>FULLNAME</th>
+                <th>TYPE</th>
+                <th>ADDRESS</th>
+                <th>BARANGAY</th>
+                <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for i in rw%}
+                <tr>
+                <td style="display: none !important;">{{i[0]}}</td>
+                <td><input class="form-control" type="text" required id="fn" value="{{i[1]}}"></td>
+                <td><select class="form-select" type="text" required id="precint">
+                    <option >{{i[2]}}</option>
+                    {%for a in t%}
+                    <option>{{a}}</option>
+                    {%endfor%}
+                    </select>
+                </td>
+                <td><input class="form-control" type="text" required id="purok" value="{{i[4]}}"></td>
+                <td><select class="form-select" type="text" id="barangay" required>
+                    <option>{{i[3]}}</option>
+                    {%for i in b%}
+                        <option>{{i[0]}}</option>
+                    {%endfor%}
+                </select></td>
+                <td><button class="btn btn-success btn-sm" id="coor_update">Update</button>
+                    <button class="btn btn-danger btn-sm" id="coor_delete">Delete</button>
+                </td>
+            </tr>
+            {%endfor%}
+            </tbody>
+        </table>
+        <p class="savemessage"></p>
+        <script>
+            $('#profile-content').on("click","#coor_update",function(){
+                var tr=$(this).closest("tr")
+                var id=tr.find("td:eq(0)").text()
+                var fn=tr.find("td:eq(1) input[type=text]").val()
+                var typ=tr.find("td:eq(2) select").val()
+                var add=tr.find("td:eq(3) input[type=text]").val()
+                var bgy=tr.find("td:eq(4) select").val()
+                if(id!=''){
+                    $.ajax({
+                        url:"{{url_for('profile.coordinator_update')}}",
+                        type:'post',
+                        data:{'id':id,'fn':fn,'typ':typ,'add':add,'bgy':bgy},
+                        success:function(res){
+                                alert('Data Successfully Updated!')
+                        }
+                    })
+                }else{
+                    alert('Something Error! Maybe Reference ID is Null!')
+                }
+            })
+        </script>
+        <script>
+            
+            $('#profile-content').on("click","#coor_delete",function(){
+                var tr=$(this).closest("tr")
+                var id=tr.find("td:eq(0)").text()
+                if(id==''){
+                    $('.savemessage').html("<i> Something Error, Data was not Deleted please try again!</i>")
+                    $('.savemessage').css("color","red")
+                }
+                else{
+                $.ajax({
+                    url:"{{url_for('profile.coordinator_delete')}}",
+                    type:'post',
+                    data:{'idd':id},
+                    success:function(res){
+                    $('#verify_result').html(res)
+                    $('#verify_result').append(res.html)
+                    $('.savemessage').html("<i>  Data was deleted successfully!</i>")
+                    $('.savemessage').css("color","Green")
+                    }
+                })
+                }
+            })
+
+        </script>
+{%endblock%}

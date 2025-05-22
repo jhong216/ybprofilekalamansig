@@ -1,0 +1,45 @@
+<table class="table table-responsive-sm table-striped" style="width: 100% !important;" id="tbl_profile_list">
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Full Name</th>
+            <th>Precint</th>
+            <th>Address</th>
+            <th>Barangay</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for i in rw%}
+        <tr>
+        <td style="display: none !important;">{{i[0]}}</td>
+        <td>{{i[6]}}</td>
+        <td>{{i[1]}}</td>
+        <td>{{i[2]}}</td>
+        <td>{{i[3]}}</td>
+        <td>{{i[4]}}</td>
+        <td><button class="btn btn-sm btn-danger" id="profile_btn_delete">Delete</button></td>
+        {%endfor%}
+    </tr>
+    </tbody>
+</table>
+<script>
+    $('#tbl_profile_list').on("click","#profile_btn_delete",function(){
+        var tr=$(this).closest("tr")
+        var iid=tr.find("td:eq(0)").text()
+        var code=tr.find("td:eq(2)").text()
+
+        $.ajax({
+            url:"{{url_for('profile.profile_list_delete')}}",
+            type:"POST",
+            data:{'aydi':iid,'code':code},
+            success:function(res){
+                $('.cont').html(res)
+                $('.cont').append(res.html)
+                $('.savemessage').html(res.msg)
+                $('.savemessage').css("color","red")
+            }
+        })
+    })
+
+</script>

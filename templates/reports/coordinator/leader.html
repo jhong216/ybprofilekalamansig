@@ -1,0 +1,25 @@
+<STYLe>
+    *{font-family: ARIAL;}
+</STYLe>
+<h3 style="font-family: 'arial black';text-align: center;border-bottom: 1px solid;">BARANGAY {{brgy}} SENATOR NINOY AQUINO, SULTAN KUDARAT <br>KAPAMILYA / KAMALAYAN PARTY LIST</h3> 
+<br>
+<h4>PRECINT LEADER/ASSESOR</h4>
+<table style="width: 100%;">
+    {%for l,i in rw|groupby(2)%}
+    <tr>
+        <td colspan="3"><strong><u>{{loop.index}}. {{l}}</u></strong></td>
+        <td><strong><u>{{i[0][5]}}</u></strong></td>
+        <td><strong><u><strong>{{i[0][6]}}</strong></td>
+
+    </tr>
+    {%for m in i %}
+    <tr>
+            <td>{{loop.index}}</td>
+            <td>{{m[0]}}</td>
+            <td>{{m[1]}}</td>
+            <td>{{m[3]}}</td>
+            <td>{{m[4]}}</td>
+    </tr>
+    {%endfor%}
+{%endfor%}
+</table>

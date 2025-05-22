@@ -1,0 +1,64 @@
+{%extends 'reports_home.html'%}
+{%block reports%}
+
+<style>
+    @media print {
+  body {
+    visibility: hidden;
+  }
+  #prnt_cluster{
+    visibility: visible;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    a{text-decoration: none;color: black;}
+  }
+}
+</style>
+<div style="width: 100%;margin: auto;padding: 5px" id="prnt_cluster">
+    <p>KAMALAYAN SNA CLUSTER FIGURE</p>
+<table class="table table-bordered table-sm table-hover">
+    <thead>
+        <tr style="text-align: center;">
+        <th>CLUSTER</th>
+        <th>NO. OF <br>VOTERS</th>
+        <th>TARGET <br> 64.05%</th>
+        <th>TARGET <br>CAPTURED</th>
+        <th>TARGET <br>UNCAPTURED</th>
+        <th>BALANCE</th>
+    </tr>
+    </thead>
+
+    <tbody>
+{%for i in rw%}
+        <tr style="text-align: center;">
+            <TD>{{i[0]}}</TD>
+            <TD>{{i[1]}}</TD>
+            <TD>{{i[2]}}</TD>
+            <TD><a href="{{url_for('c.cluster_captured',p=i[0])}}" target="_blank">{{i[3]}}</a></TD>
+            <td>
+            {%if (i[2]-i[3] >0)%}
+            <span style="color: red;"> {{i[2]-i[3]}}</span>
+            {%else%}
+            <span>{{((i[2]-i[3])*-1)}}</span>
+            {%endif%}
+            </td>
+            <TD><a href="{{url_for('c.cluster_uncaptured',p=i[0])}}" target="_blank">{{i[1]-i[3]}}</a></TD>
+        </tr>
+{%endfor%}
+{%for i in trw%}
+<tr style="text-align: center; font-weight: bolder;">
+    <td style="text-align: left;">TOTAL</td>
+    <td >{{i[0]}}</td>
+    <td >{{i[1]}}</td>
+    <td>{{i[2]}}</td>
+    <td >{{i[1]-i[2]}}</td>
+    <td >{{i[0]-i[2]}}</td>
+</tr>
+{%endfor%}
+    </tbody>
+
+</table>
+</div>        
+{%endblock%}

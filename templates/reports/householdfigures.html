@@ -1,0 +1,30 @@
+{%extends 'reports_home.html'%}
+{%block reports%}
+<div style="width: 80%;margin: auto;padding: 5px;">
+<table class="table table-bordered-sm">
+    <thead>
+        <th>BARANGAY</th>
+        <th>HOUSEHOLD NUMBER</th>
+        <th style="text-align: center;">FIGURE</th>
+    </thead>
+
+    <tbody>
+        {%for i in rw%}
+        <tr>
+            <td>{{i[0]}}</td>
+            <td><a href="{{url_for('report.report_hhlist',hh=i[1])}}" target="_blank">{{i[1]}}</a></td>
+            <td style="text-align: center;"><a href="{{url_for('report.report_hhlist',hh=i[1])}}" target="_blank">{{i[2]}}</a></td>
+        </tr>
+        {%endfor%}
+        <tr>
+            <td style="color: blue !important; font-weight: bolder;">TOTAL</td>
+            <td></td>
+            <td style="color: blue !important;  font-weight: bolder;text-align: center;" >{{rw2}}</td>
+            <td></td>
+         
+        </tr>
+    </tbody>
+
+</table>
+</div>        
+{%endblock%}

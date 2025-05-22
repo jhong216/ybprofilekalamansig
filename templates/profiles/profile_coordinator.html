@@ -1,0 +1,51 @@
+{%extends 'profiles_home.html'%}
+{%block profile%}
+<div class="form-inline">
+<div class="form-inline" style="padding-bottom:2px; width: 100%;">
+    <form action="">
+        <div class="input-group w-50 mt-2">
+            <input type="text" class="form-control" placeholder="Search . . . " id="txtsearch" style="min-width: 100px !important;">
+            <div class="input-group-append">
+              <button class="btn btn-success" type="button" id="btnfind">Find</button>
+            </div>
+            <div class="input-group-append" style="margin-left: 3px;">
+                <a class="btn btn-success" type="button" id="newcoor" href="{{url_for('profile.profile_coordinator_new')}}">New Coordinator</a>
+                <a class="btn btn-success" type="button" id="newcoor" href="{{url_for('profile.coordinators_list')}}">Display All Coordinator</a>
+              </div>
+        </div>
+    </form>
+</div>
+
+</div>
+<script>
+    $('#btnfind').click(function(){
+        var cri=$('#txtsearch').val()
+        if (cri==''){
+            $('#verify_result').html("<p class='pmessage'> Searchbox may be empty! Please try again </p>")
+        }else{
+            $.ajax({
+                url:"{{url_for('profile.profile_verification_coordinator')}}",
+                type:'post',
+                data:{'cri':cri},
+                success:function(res){
+                    $('#verify_result').html(res)
+                    $('#verify_result').append(res.html)
+                    $('#msg').html(res.msg)
+                    
+                }
+            })
+        }
+    })
+</script>
+<hr>
+<div id="verify_result">
+    {%block coordinator%}
+       
+    {%endblock%}
+</div>
+<p id="msg"></p>
+<style>
+    table *{font-size: 12px;}
+    .form-control{padding: none;margin: 0;}
+</style>
+{%endblock%}

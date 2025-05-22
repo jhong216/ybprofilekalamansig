@@ -1,0 +1,35 @@
+<style>
+    *{font-family: ARIAL;}
+    table,th,tr,td{border: 1px solid gray;border-collapse: collapse;padding: 3px;}
+    table{width: 100%;}
+    table td,th{font-size: small;}
+</style>
+
+<h1>KAMALAYAN MEMBERS</h1>
+<strong style="color: blue;">LEADER : {{cor}}</strong>
+<table>
+    <thead>
+        <tr>
+            <th>NO</th>
+            <th>FULL NAME</th>
+            <th>PRECINT</th>
+            <th>PUROK/SITIO</th>
+            <th>BARANGAY</th>
+            <th>TYPE</th>
+            <th>HH NO</th>
+        </tr>    
+    </thead>
+    <tbody>
+        {%for i in rw%}
+        <tr>
+            <td style="text-align: center;">{{loop.index}}</td>
+            <td>{{i[0]}}</td>
+            <td>{{i[1]}}</td>
+            <td>{{i[2]}}</td>
+            <td>{{i[3]}}</td>
+            <td style="text-align: center;">{{i[6]}}</td>
+            <td style="text-align: center;">{{i[7]}}</td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>

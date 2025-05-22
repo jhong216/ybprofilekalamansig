@@ -1,0 +1,29 @@
+{%extends 'voters_home.html'%}
+{%block voters%}
+<table class="table table-striped table-sm">
+    <thead>
+      <tr style="text-align: center !important;">
+        <th scope="col">BARANGAY</th>
+        <th scope="col">FIGURE</th>
+        <th scope="col">Actions</th>
+      
+      </tr>
+    </thead>
+    <tbody>
+    {%for i in rw%}
+      <tr >
+        <td>{{i[0]}}</td>
+        <td style="text-align: center !important;">{{i[1]}}</td>
+        <td style="text-align: center !important;"><a class="rpt_link" href="{{url_for('voters.voters_list_barangay',brgy=i[0])}}" target="_blank">Voters List</a></td>
+ 
+      </tr>
+      {%endfor%}
+      <tr class="table-secondary" style="font-weight: bolder !important;">
+        <td >TOTAL</td>
+        <td style="text-align: center  !important;">{{total}}</td>
+        <td></td>
+      </tr>
+     </tbody>
+  </table>
+
+{%endblock%}

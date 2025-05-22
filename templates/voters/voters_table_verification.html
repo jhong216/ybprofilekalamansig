@@ -1,0 +1,25 @@
+
+<table class="table table-bordered table-responsive-sm">
+    <thead>
+      <tr style="text-align: center !important;">
+        <th scope="col">FULLNAME</th>
+        <th scope="col">PRECINT</th>
+        <th scope="col">SITIO / PUROK</th>
+        <th scope="col">BARANGAY</th>
+      
+      </tr>
+    </thead>
+    <tbody>
+    {%for i in rw%}
+      <tr >
+        <td>{{i[1]}}</td>
+        <td>{{i[2]}}</td>
+        <td>{{i[3]}}</td>
+        <td>{{i[4]}}</td>
+
+        
+      </tr>
+      {%endfor%}
+     </tbody>
+  </table>
+

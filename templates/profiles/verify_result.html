@@ -1,0 +1,71 @@
+<table class="table table-bordered table-sm" id="profile-content" >
+    <thead>
+        <tr style="text-align: center;">
+        <th>FULLNAME</th>
+        <th>PRECINT</th>
+        <th>SITIO/PUROK</th>
+        <th>BARANGAY</th>
+        <th>CODE</th>
+        <th>LEADER</th>
+        <th>ACTION</th>
+        </tr>
+    </thead>
+    {%for i in rw%}
+    <tr>
+        <td style="display: none;">{{i[0]}}</td>
+        <td>{{i[1]}}</td>
+        <td style="text-align: center;">{{i[2]}}</td>
+        <td>{{i[3]}}</td>
+        <td>{{i[4]}}</td>
+        <td> <input type="text" value="{{i[6]}}" class="form-control"></td>
+        <td><select class="form-select">
+            <option value="{{i[5]}}">{{i[13]}}</option>
+          {%for i in crw%}
+           <option value="{{i[0]}}">{{i[1]}}</option>
+          {%endfor%}
+        </select></td>
+        <td style="text-align: center;">
+        <button class="btn btn-primary btn-sm" id="profile_update">Update</button>
+        <button class="btn btn-danger btn-sm" id="profile_delete">Delete</button>
+        </td>
+    </tr>
+    {%endfor%}
+</table>
+<style>
+    .form-control,.form-select {border: none;background-color: transparent;}
+</style>
+<script>
+    $('#profile-content').on("click","#profile_delete",function(){
+        var tr=$(this).closest("tr");
+        var id=tr.find("td:eq(0)").text();4
+        var cri=$('#txtsearch').val()
+        $.ajax({
+            url:"{{url_for('profile.profile_delete')}}",
+            type:"post",
+            data:{'aydi':id,'cri':cri},
+            success:function(res){
+                $('#verify_result').html(res)
+                $('#verify_result').append(res.html)
+            }
+        })
+    })
+</script>
+<script>
+    $('#profile-content').on("click","#profile_update",function(){
+        var tr=$(this).closest("tr");
+        var id=tr.find("td:eq(0)").text()
+        var code=tr.find("td:eq(5) input[type=text]").val()
+        var coor=tr.find("td:eq(6) select").val()
+        var cri=$('#txtsearch').val()
+        $.ajax({
+            url:"{{url_for('profile.profile_update')}}",
+            type:"post",
+            data:{'id':id,'code':code,'coor':coor,'cri':cri},
+            success:function(res){
+                $('#verify_result').html(res)
+                $('#verify_result').append(res.html)
+                $('#msg').html(res.msg)
+                    
+            }})
+    })
+</script>

@@ -1,0 +1,36 @@
+{%extends 'reports_home.html'%}
+{%block reports%}
+<div style="width: 80%;margin: auto;padding: 5px;">
+<table class="table table-bordered-sm">
+    <thead>
+        <tr style="text-align: center;">
+        <th>BARANGAY</th>
+        <th>FIGURE</th>
+        <th style="text-align: center;">ACTION</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {%for i in rw%}
+        <tr>
+            <td>{{i[0]}}</td>
+            <td style="text-align: center;">{{i[1]}}</td>
+            <td style="text-align: center;"><a href="{{url_for('report.brgy_list_report',cri=i[0])}}" class="rpt_link" target="_blank">View List</a>
+                <a href="{{url_for('report.report_purok_figure',brgy=i[0])}}" class="rpt_link">Purok / Sitio</a>
+                <a href="{{url_for('report.coor_figure_brgy',brgy=i[0])}}" class="rpt_link">Coordinators</a>
+                <a href="{{url_for('report.report_hh_figure',brgy=i[0])}}" class="rpt_link" >House Holds</a>
+                <a href="{{url_for('report.household_list_brgy',brgy=i[0])}}" class="rpt_link" target="_blank">House Holds List PDF</a>
+            
+            </td>
+        </tr>
+        {%endfor%}
+        <tr>
+            <td style="color: blue !important; font-weight: bolder;">TOTAL</td>
+            <td style="color: blue !important;  font-weight: bolder;text-align: center;">{{rw2}}</td>
+            <td></td>
+        </tr>
+    </tbody>
+
+</table>
+</div>        
+{%endblock%}

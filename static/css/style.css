@@ -1,0 +1,10 @@
+a:hover{text-decoration: underline !important}
+.main{padding: 10px;
+    padding-top:0px !important;}
+H6{padding: 10px;margin:0;text-align:left;font-family: "ARIAL BLACK";color: teal;}
+table,.form-control,.form-select{font-size: 12px;border-radius: 2px !important;}
+.pmessage{padding: 10px;color: red;text-align: center;width: 80%;padding: 20px;background-color: yellow;
+          box-shadow: 5px 5px 10px 5px gray;margin: auto;margin-top: 5px;border-radius: 5px;}
+table tr:hover{background-color:green;cursor: pointer;}
+.savemessage{padding:0;color: green;}
+.rpt_link{padding-left: 20px;}

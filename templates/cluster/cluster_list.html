@@ -1,0 +1,38 @@
+<style>
+    *{font-family:'Courier New', Courier, monospace;}
+    table{font-size: medium;}
+    table,td,th,tr{border: 1px solid gray ;border-collapse: collapse;}
+    table{width: 100%;}
+    h1,h4{padding: 0;mar}
+</style>
+
+<H1>{{T}}</H1>
+{%if cls%}
+<h4>CLUSTER : {{cls}}</h4>
+{%endif%}
+<table>
+    <thead>
+        <tr style="text-align: center;">
+           <th>NO</th>
+           <th>FULLNAME</th>
+           <th>PRECINT</th>
+           <th>CLUSTER</th>
+           <th>PUROK</th>
+           <th>BARANGAY</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for i in rw%}
+        <tr>
+            <td style="text-align: center;">{{loop.index}}</td>
+            <td>{{i[0]}}</td>
+            <td style="text-align: center;">{{i[1]}}</td>
+            <td style="text-align: center;">{{i[2]}}</td>
+            <td>{{i[3]}}</td>
+            <td>{{i[4]}}</td>
+
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+<p style="text-align: center;padding: 0;margin: 0;">***********************************END***********************************</p>

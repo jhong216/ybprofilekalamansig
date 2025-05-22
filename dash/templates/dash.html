@@ -1,0 +1,63 @@
+{%extends 'home.html'%}
+{%block main%}
+<style>
+    @media print {
+  body {
+    visibility: hidden;
+  }
+  #prnt{
+    visibility: visible;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+</style>
+<div id="prnt">
+<H1 style="text-align: center;font-family: 'arial black'; color: blue;padding: 0;margin: 0;border-bottom: 1px solid blue;">DASHBOARD</H1>
+<table class="table table-bordered table-sm table-hover">
+<thead>
+    <tr style="text-align: center;">
+    <th>BARANGAY</th>
+    <th>VOTERS</th>
+    <th>TARGET <br> 64.05%</th>
+    <th>CAPTURED</th>
+    <th>BALANCE</th>
+</tr>
+</thead>
+{%for i in rw%}
+{%if i[4] > 1 %}
+<tr class="table-danger">
+    <td>{{i[0]}}</td>
+    <td style="text-align: center;">{{'{0:0,}'.format(i[1])}}</td>
+    <td style="text-align: center;">{{'{0:0,}'.format(i[2])}}</td>
+    <td style="text-align: center;">{{'{0:0,}'.format(i[3])}}</td>
+    <td style="text-align: center;">{{'{0:0,}'.format(i[4])}}</td>
+</tr>
+{%else%}
+<tr class="table-danger">
+  <td style="background-color: green; color:white;">{{i[0]}}</td>
+  <td style="text-align: center;background-color: green; color: white;">{{'{0:0,}'.format(i[1])}}</td>
+  <td style="text-align: center;background-color: green; color: white;">{{'{0:0,}'.format(i[2])}}</td>
+  <td style="text-align: center;background-color: green; color: white;">{{'{0:0,}'.format(i[3])}}</td>
+  <td style="text-align: center;background-color: green; color: white;">{{'{0:0,}'.format(i[4])}}</td>
+</tr>
+{%endif%}
+{%endfor%}
+
+
+
+{%for i in trw%}
+<tr style="font-weight: bolder;">
+    <td>TOTAL</td>
+    <td style="text-align: center;">{{i[0]}}</td>
+    <td style="text-align: center;">{{i[1]}}</td>
+    <td style="text-align: center;">{{i[2]}}</td>
+    <td style="text-align: center;">{{i[3]}}</td>
+
+</tr>
+{%endfor%}
+</table>
+</div>
+{%endblock%}

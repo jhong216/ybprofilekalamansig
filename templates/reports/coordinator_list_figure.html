@@ -1,0 +1,40 @@
+{%extends 'Reports_home.html'%}
+
+{%block reports%}
+<div style="width: 80%;margin: auto;padding: 5px;">
+<table class="table table-bordered-sm">
+    <thead>
+        <th>COORDINATOR</th>
+        <th>PUROK/SITIO</th>
+        <th>FIGURE</th>
+        <th>ACTIONS</th>
+    </thead>
+
+    <tbody>
+        {%for b,i in rw|groupby(0)%}
+        <tr>
+            <td colspan="3" style="font-family: 'arial black';color: blue !important;"> {{b}}</td>
+            <td><a href="{{url_for('report.brgy_list_hh',cri=b)}}" class="btn btn-success btn-sm" target="_blank">View List</a>
+        </tr>
+        {%for c in i%}
+        <tr>
+            <td>{{c[2]}}</td>
+            <td>{{c[1]}}</td>
+            <td style="text-align: center;">{{c[3]}}</td>
+           
+            
+            </td>
+        </tr>
+        {%endfor%}
+        {%endfor%}
+        <tr>
+            <td style="color: blue !important; font-weight: bolder;">TOTAL</td>
+            <td></td>
+            <td style="color: blue !important;  font-weight: bolder;text-align: center;">{{rw2}}</td>
+            <td></td>
+        </tr>
+    </tbody>
+
+</table>
+</div>        
+{%endblock%}

@@ -1,0 +1,25 @@
+{%extends 'reports_home.html'%}
+{%block reports%}
+<div style="width: 80%;margin: auto;padding: 5px;">
+{%for g,i in rw|groupby(0)%}
+
+<h5>{{g}}</h5>
+<table class="table table-striped-sm">
+    <tr style="text-align: center;">
+        <th style="text-align: left;">BARANGAY</th>
+        <th>FIGURE</th>
+    </tr>
+    {%for b in i%}
+    <tr>
+        <td>{{b[1]}}</td>
+        <td style="text-align: center !important;"><a href="{{url_for('report.brgy_groupingbarangay_report',brgy=b[1],group=b[0])}}" target="_blank">{{b[2]}}</a></td>
+    </tr>
+    {%endfor%}
+    <tr style="font-weight: bolder;">
+        <td style="background-color: gray;">TOTAL</td>
+        <td style="background-color: gray;text-align: center;">{{i|sum(attribute='2')}}</td>
+    </tr>
+</table>
+{%endfor%}
+</div>
+{%endblock%}

@@ -1,0 +1,26 @@
+{%extends 'home.html'%}
+{%block main%}
+<H6>REPORTS PAGE</H6>
+<ul class="nav justify-content-center bg-secondary navbar-sm">
+
+    <li class="nav-item">
+      <a class="nav-link text-light" href="{{url_for('report.report_barangay_figure')}}">Barangay</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-light" href="{{url_for('report.coor_figure')}}">Coordinators</a>
+    <li class="nav-item">
+      <a class="nav-link text-light" href="{{url_for('c.cluster_figures')}}">Clusters</a>
+    </li>
+      </li>
+    <!-- <li class="nav-item">
+      <a class="nav-link text-light" href="{{url_for('c.clustered_precincts')}}">Precincts</a>
+    </li> -->
+    <!-- <li class="nav-item">
+      <a class="nav-link text-light" href="#">Reports</a>
+    </li> -->
+
+  </ul>
+
+{%block reports%}
+{%endblock%}
+{%endblock%}

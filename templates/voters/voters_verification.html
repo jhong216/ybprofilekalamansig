@@ -1,0 +1,42 @@
+{%extends 'voters_home.html'%}
+{%block voters%}
+<form action="">
+    <div class="input-group w-25 mt-2">
+        <input type="text" class="form-control" placeholder="Search . . . " id="txtsearch">
+        <div class="input-group-append">
+          <button class="btn btn-success" type="button" id="btnfind">Find</button>
+        </div>
+      </div>
+</form>
+<script>
+$('#btnfind').click(function(){
+  var cri=$('#txtsearch').val();
+  if ($('#txtsearch').val()=='') {
+    $('#verify_result').html("<p class='pmessage'>Hoy! wala unod searchbox! Tistinge liwat.  Salamat. </p>");
+    }else{
+      $.ajax({
+      url:"{{url_for('voters.voters_list_verification')}}",
+      type:'post',
+      data:{'cri':cri},
+      success:function(res){
+        $('.savemessage').html(res)
+        $('#verify_result').html(res);
+        $('#verify_result').append(res.html)
+      }
+    })
+    }
+})
+
+
+
+</script>
+<hr>
+<div class="contaner" id="verify_result">
+
+
+
+</div>
+
+      <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+{%endblock%}

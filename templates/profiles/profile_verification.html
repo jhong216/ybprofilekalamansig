@@ -1,0 +1,66 @@
+{%extends 'profiles_home.html'%}
+{%block profile%}
+<div style="padding-bottom:2px; width: 100%;">
+    <form action="">
+        <div class="input-group w-25 mt-2">
+            <input type="text" class="form-control" placeholder="Search . . . " id="txtsearch">
+            <div class="input-group-append">
+              <button class="btn btn-success" type="button" id="btnfind">Find</button>
+            </div>
+          </div>
+    </form>
+</div>
+<script>
+    $('#btnfind').click(function(){
+        var cri=$('#txtsearch').val()
+        if (cri==''){
+            $('#verify_result').html("<p class='pmessage'> Searchbox may be empty! Please try again </p>")
+        }else{
+            $.ajax({
+                url:"{{url_for('profile.profile_verification_result')}}",
+                type:'post',
+                data:{'cri':cri},
+                success:function(res){
+                    $('#verify_result').html(res)
+                    $('#verify_result').append(res.html)
+                    $('#msg').html(res.msg)
+                    
+                }
+            })
+        }
+    })
+</script>
+<hr>
+<div id="verify_result">
+        <!-- <table class="table table-bordered table-responsive-sm" id="profile-content" >
+            <thead>
+                <tr>
+                <th>FULLNAME</th>
+                <th>PRECINT</th>
+                <th>SITIO/PUROK</th>
+                <th>BARANGAY</th>
+                <th>GROUPING</th>
+                <th>CODE</th>
+                <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                <td><input class="form-control" type="text" required disabled id="fn"></td>
+                <td><input class="form-control" type="text" required disabled id="precint"></td>
+                <td><input class="form-control" type="text" required disabled id="purok"></td>
+                <td><input class="form-control" type="text" id="barangay" required disabled></td>
+                <td><select class="form-select" type="text" id="group">
+                    <option value="NONE">--SELECT--</option>
+
+                    </select></td>
+                <td><input class="form-control" type="text" id="code" value="-"></td>
+                <td><button class="btn btn-primary btn-sm" id="profile_save">Save</button></td>
+            </tbody>
+        </table> -->
+</div>
+<p id="msg" style="color: blue;"></p>
+<style>
+    table *{font-size: 12px;}
+    .form-control{padding: none;margin: 0;}
+</style>
+{%endblock%}

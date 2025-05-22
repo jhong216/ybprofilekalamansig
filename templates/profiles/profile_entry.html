@@ -1,0 +1,168 @@
+{%extends 'profiles_home.html'%}
+{%block profile%}
+<div style="padding-bottom:2px; width: 100%;">
+    <form action="">
+        <div class="input-group w-25 mt-2">
+            <input type="text" class="form-control" placeholder="Search . . . " id="txtsearch">
+            <div class="input-group-append">
+              <button class="btn btn-success" type="button" id="btnfind">Find</button>
+            </div>
+          </div>
+    </form>
+</div>
+<script>
+    $('#btnfind').click(function(){
+        var cri=$('#txtsearch').val()
+        if (cri==''){
+            $('#voters_content').html("<p class='pmessage'> Searchbox may be empty! Please try again </p>")
+        }else{
+            $.ajax({
+                url:"{{url_for('profile.profile_entry')}}",
+                type:'post',
+                data:{'cri':cri},
+                success:function(res){
+                    $('.savemessage').html(res)
+                    $('#voters_content').html(res)
+                    $('#voters_content').append(res.html)
+                    
+                }
+            })
+        }
+    })
+</script>
+<div style="width:100%;height: 200px;overflow-y: scroll;border-top:1px solid gray;" id="voters_content">
+
+</div>
+<hr>
+<div>
+        <table class="table table-borderless table-sm" id="profile-content" >
+            <thead>
+                <tr><th>COORDINATOR</th></tr>
+                <tr>
+                    <td>
+                        <Select class="form-select" id="coor">
+                            <option value="-">--SELECT--</option>
+                            {%for i in rw%}
+                            <option value="{{i[0]}}">{{i[1]}}</option>
+                            {%endfor%}
+                        </Select>
+                </td>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                <!-- <th>COORDINATOR</th> -->
+                <th>CODE</th>
+                <th>FULLNAME</th>
+                <th>PRECINT</th>
+                <th>SITIO/PUROK</th>
+                <th>BARANGAY</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <td><select class="form-select" type="text" id="coor">
+                    <option value="NONE">--SELECT--</option>
+                    {%for i in rw%}
+                    <option>{{i[0]}}</option>
+                    {%endfor%}
+                    </select></td> -->
+                <td><input class="form-control" type="text" id="code"></td>
+                <td><input class="form-control" type="text" required disabled id="fn"></td>
+                <td><input class="form-control" type="text" required disabled id="precint"></td>
+                <td><input class="form-control" type="text" required disabled id="purok"></td>
+                <td><input class="form-control" type="text" id="barangay" required disabled></td>
+                <tr>
+                    <th>KAMALAYAN TYPE</th>
+                    <th>GENDER</th>
+                    <th>STATUS</th>
+                    <th>BIRTHDAY</th>
+                    <th>OCCUPATION</th>
+                </tr>
+                <tr>
+                    <td><select class="form-select"  id="type">
+                    <option value="-">--SELECT--</option>
+                    <option>HEAD</option>
+                    <option>MEMBERS</option>
+                    <option>OTHERS</option>
+                    </select></td>
+                    <td>
+                        <select class="form-select" type="text" id="gender">
+                            <option>--SELECT--</option>
+                            <option>MALE</option>
+                            <option>FEMALE</option>
+                    </select>
+
+                    </td>
+                    <td><select class="form-select" type="status" id="status">
+                         <option value="-">--SELECT--</option>
+                            <option>SINGLE</option>
+                            <option>MARRIED</option>
+                            <option>SEPERATED</option>
+                    </select></td>
+                    <td><input class="form-control" type="date" id="birthday" required></td>
+                    <td><input class="form-control" type="status" id="occupation" required></td>
+                
+
+                </tr>
+                <tr>
+                    <td colspan="6"><button class="btn btn-primary btn-sm" id="profile_save">Save</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="savemessage"></p>
+        <hr>
+        <div class="cont" style="width:100% !important;">
+    
+        </div>
+</div>
+
+<script>
+    $('#profile_save').click(function(){
+        var coor=$('#coor').val()
+        var fn=$('#fn').val()
+        var precint=$('#precint').val()
+        var purok=$('#purok').val()
+        var brgy=$('#barangay').val()
+        var gender=$('#gender').val()
+        var code=$('#code').val()
+        var status=$('#status').val()
+        var birthday=$('#birthday').val()
+        var occupation=$('#occupation').val()
+        var type=$('#type').val()
+        if((code=='') || (fn=='') || (precint=='') || (barangay=='') || (purok=='') || (type=='')){
+               $('.savemessage').html("<i> Something Error, Data was not save please try again!</i>")
+               $('.savemessage').css("color","red")
+        }
+        else{
+            $.ajax({
+                url:"{{url_for('profile.profile_save')}}",
+                type:"post",
+                data:{'fn':fn,'precint':precint,'purok':purok,
+                'barangay':brgy,'gender':gender,'code':code,'status':status,
+            'birthday':birthday,'occupation':occupation,'type':type ,'coor':coor},
+                success:function(res){
+                    $('#fn').val('')
+                    $('#precint').val('')
+                    $('#purok').val('')
+                    $('#barangay').val('')
+                    $('#gender').val('')
+                    $('#status').val('')
+                    $('#birthday').val('')
+                    $('#occupation').val('')
+                    $('#type').val('')
+                    $('.savemessage').html(res.msg)
+                    $('.savemessage').css("color","green")
+                    $('.cont').html(res)
+                    $('.cont').append(res.html)
+                }
+            })
+        }
+    })
+</script>
+
+<style>
+    table *{font-size: 12px;}
+    table th{font-size: small;}
+    .form-control{padding: none;margin: 0;}
+</style>
+{%endblock%}

@@ -1,0 +1,63 @@
+{%extends 'profile_coordinator.html'%}
+{%block coordinator%}
+<table class="table table-responsive-sm">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Purok/Sitio</th>
+            <th>Barangay</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><input type="text" class="form-control" id="name"></input></td>
+            <td><Select type="text" class="form-select" id="type">
+                <option value="">--SELECT--</option>
+                {%for i in t%}
+                <option>{{i}}</option>
+                {%endfor%}
+            </Select></td>
+            <td><input type="text" class="form-control" id="address"></input></td>
+            <td><Select type="text" class="form-select" id="brgy">
+                <option value="">--SELECT--</option>
+                {%for i in b%}
+                <option>{{i[0]}}</option>
+                {%endfor%}
+            </Select></td>
+            <td><button class="btn btn-success btn-sm" id="coor_add">Add</button></td>
+        </tr>
+        </tr>
+    </tbody>
+</table>
+<hr>
+<p class="savemessage"></p>
+<script>
+    $('#coor_add').click(function(){
+        var name=$('#name').val();
+        var type=$('#type').val();
+        var address=$('#address').val();
+        var brgy=$('#brgy').val();
+
+        if((name=='')||(type=='--SELECT--')||(address=='')||(brgy=='--SELECT--')){
+            $('.savemessage').html("<i> Something Error, Data was not save please try again!</i>")
+            $('.savemessage').css("color","red")
+        }else{
+            $.ajax({
+                url:"{{url_for('profile.coordinator_save')}}",
+                type:"post",
+                data:{'name':name,'type':type,'address':address,'brgy':brgy},
+                success:function(res){
+                    $('#name').val('')
+                    $('#type').val('--SELECT--')
+                    $('#address').val('')
+                    $('#brgy').val('--SELECT--')
+                    $('.savemessage').html(res.msg)
+                    $('.savemessage').css("color","green")
+                }
+            })
+        }
+    })
+</script>
+{%endblock%}

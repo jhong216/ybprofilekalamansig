@@ -1,0 +1,31 @@
+{%extends 'reports_home.html'%}
+{%block reports%}
+<table class="table table-bordered table-sm table-hover">
+    <thead>
+        <TR style="text-align: center;">
+        <th>NO</th>
+        <th>FULL NAME</th>
+        <th>TYPE</th>
+        <th>ADDRESS</th>
+        <th>BARANGAY</th>
+        <th>FIGURES</th>
+    </TR>
+    </thead>
+    <TBODY>
+        {%for i in rw%}
+        <tr>
+            <td style="display: none;">{{i[0]}}</td>
+            <td style="text-align: center;">{{loop.index}}</td>
+            <td><a href="{{url_for('report.coor_members_list',c=i[0])}}" target="_blank">{{i[1]}}</a></td>
+            <td>{{i[2]}}</td>
+            <td>{{i[3]}}</td>
+            <td>{{i[4]}}</td>
+            <td style="text-align: center;"><a href="{{url_for('report.coor_members_list',c=i[0])}}" target="_blank">{{i[5]}}</a></td>
+        </tr>
+        {%endfor%}
+    </TBODY>
+</table>
+
+
+
+{%endblock%}

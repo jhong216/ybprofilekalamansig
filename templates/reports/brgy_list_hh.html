@@ -1,0 +1,52 @@
+<h1>KAMALAYAN MEMBERS</h1>
+
+<table style="width: 100%;">
+    <thead>
+        <tr style="background-color: lightgrey;">
+        <th>NO</th>
+        <th>FULL NAME</th>
+        <th>PRECINT</th>
+        <th>SITIO / PUROK</th>
+        <th>BARANGAY</th>
+        <th>REMARKS</th>
+        <th>STATUS</th>
+        </tr>     
+    </thead>
+    <tbody>
+        {%for c,d in rw|groupby(13)%}
+        <tr><td colspan="7" style="font-family: 'arial black';">{{c}}</td></tr>
+        {%for h,e in d|groupby(6)%}
+        <tr>
+            <td colspan="7" style="text-align: right;"><strong>Household No : {{h}}</strong></td>
+        </tr>
+        {%for i in e%}
+        <tr>
+            <td style="text-align: center;">{{loop.index}}</td>
+            <td>{{i[1]}}</td>
+            <td style="text-align: center;">{{i[2]}}</td>
+            <td>{{i[3]}}</td>
+            <td>{{i[4]}}</td>
+            <td>{{i[7]}}</td>
+            <td></td>
+        </tr>
+        {%endfor%}
+        {%endfor%}
+        {%endfor%}
+    </tbody>
+</table>
+<style>
+    *{font-family:calibri}
+    table,th,td,tr{border: 1px solid gray;border-collapse: collapse;padding: 2px;}
+</style>
+<p style="text-align: center;padding: 0;margin: 0;">*******************************END*********************************</p>
+<br>
+{%if t=='COORDINATOR'%}
+<H4>COORDINATOR / LEADER   :   <u>{{title}}</u></H4>
+{%else%}
+<br>
+<br>
+<p style="border-top: 1px solid gray; width: 200px; text-align: center;">PRINTED NAME / SIGNATURE</p>
+{%endif%}
+<style>
+    *{font-family: 'Courier New';}
+</style>

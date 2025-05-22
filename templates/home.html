@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAPAMILYA PROFILING SYSTEM 2024</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <link rel="icon" href="{{url_for('static',filename='logo.png')}}" type="image/icon type">
+    <script src="{{url_for('static',filename='js/jquery.js')}}"></script>
+</head>
+<nav class="navbar-sm bg-primary">
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <img src="../static/logo.png" alt="" style="width: 40px;padding: 5px;">
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-light" href="{{url_for('dash.dashboard')}}">Dashboard</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-light" href="{{url_for('voters.home')}}">Voters</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-light" href="{{url_for('profile.home')}}">Profiles</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-light" href="{{url_for('report.home')}}">Reports</a>
+  </li>
+</ul>
+</nav>
+
+<body>
+<div class=main>
+{%block main%}
+<center>
+ <br>
+  <h1 style="font-family: 'arial black';color:blue;">SENATOR NINOY AQUINO</h1>
+  <img src="{{url_for('static',filename='kamalayan.jpg')}}" alt="" style="width: 300px;">
+</center>
+<div style="width: 80%;margin: auto; color: blue;">
+<p id="clock" style="text-align: center; font-family: 'arial black';font-size: 50px;"></p>
+<p id="date" style="text-align: center;"></p>
+</div>
+<script>
+(function () {
+
+  var clockElement = document.getElementById( "clock" );
+
+  function updateClock ( clock ) {
+    clock.innerHTML = new Date().toLocaleTimeString();
+  }
+
+  setInterval(function () {
+      updateClock( clockElement );
+  }, 1000);
+
+
+  document.getElementById("date").innerHTML = Date();
+}());
+</script>
+{%endblock%}
+
+</body>
+</div>
+
+</html>
